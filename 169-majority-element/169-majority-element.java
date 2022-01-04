@@ -10,6 +10,7 @@ class Solution {
          else
          {
              majority=nums[i];
+             ct=1;
          }
      }
         return majority;
