@@ -15,35 +15,47 @@ class Node {
 
 class Solution {
     Map<Node,Node> map=new HashMap<>();
-    public Node copyRandomList(Node head) {
-    Node result=null;
-    Node resHead=null;
-    Node origNode=head;    
-    while(head!=null)
+    public Node copyNextItems(Node head)
+    {
+         Node result=null;
+       Node resHead=null;
+        Node temp=head;
+         while(temp!=null)
     {
       if(result==null)
       {
-          result=new Node(head.val);
+          result=new Node(temp.val);
           resHead=result;
-          map.put(head,result);
+          map.put(temp,result);
       }
         else
         {
-            Node temp=new Node(head.val);
-            result.next=temp;
-            map.put(head,temp);
+            Node temp1=new Node(temp.val);
+            result.next=temp1;
+            map.put(temp,temp1);
             result=result.next;
         }   
-        head=head.next;    
+        temp=temp.next;    
     }
-    Node start=resHead;
-    while(start!=null && origNode!=null)
+        return resHead;
+    }
+    public Node copyRandomLinks(Node newHead,Node origHead)
     {
-        start.random=map.get(origNode.random);
-        start=start.next;
+        Node newNode=newHead;
+        Node origNode=origHead;
+         while(newNode!=null && origNode!=null)
+    {
+        newNode.random=map.get(origNode.random);
+        newNode=newNode.next;
         origNode=origNode.next;
     }
-     return resHead;   
+     return newHead;   
+    }   
+    public Node copyRandomList(Node head) {   
+    Node node=copyNextItems(head);
+    Node result=copyRandomLinks(node,head);
+    return result;    
+   
         
     }
 }
