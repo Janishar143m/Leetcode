@@ -20,18 +20,19 @@ public class Solution {
             fast=fast.next.next;
             slow=slow.next;
             if(slow==fast)
-                break;
+            {
+                slow=head;
+                 while( slow!=fast)
+                {
+                slow=slow.next;
+                fast=fast.next;
+               }
+                return slow;
+                
+            }
+           
         }
-        slow=head;
-        while(slow!=null && fast!=null && slow!=fast)
-        {
-            slow=slow.next;
-            fast=fast.next;
-        }
-        if(slow!=null && fast!=null)
-            return slow;
-        else
-            return null;
+        return null;
         
     }
 }
