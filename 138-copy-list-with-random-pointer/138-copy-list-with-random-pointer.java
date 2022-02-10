@@ -14,48 +14,46 @@ class Node {
 */
 
 class Solution {
-    Map<Node,Node> map=new HashMap<>();
-    public Node copyNextItems(Node head)
+     Map<Node,Node>map=new HashMap<>();
+    public void fixRandomPointers(Node head)
     {
-         Node result=null;
-       Node resHead=null;
-        Node temp=head;
-         while(temp!=null)
-    {
-      if(result==null)
-      {
-          result=new Node(temp.val);
-          resHead=result;
-          map.put(temp,result);
-      }
-        else
+        Node node=head;
+        while(node!=null)
         {
-            Node temp1=new Node(temp.val);
-            result.next=temp1;
-            map.put(temp,temp1);
-            result=result.next;
-        }   
-        temp=temp.next;    
+            map.get(node).random=map.get(node.random);
+            node=node.next;
+        }
+        
     }
-        return resHead;
-    }
-    public Node copyRandomLinks(Node newHead,Node origHead)
+    public Node copyNodes(Node head)
     {
-        Node newNode=newHead;
-        Node origNode=origHead;
-         while(newNode!=null && origNode!=null)
-    {
-        newNode.random=map.get(origNode.random);
-        newNode=newNode.next;
-        origNode=origNode.next;
+         Node node=head;
+        Node result=null;
+     Node resultHead=null;
+        while(node!=null)
+        {
+            Node temp=new Node(node.val);
+            map.put(node,temp);
+            if(resultHead==null)
+            {
+                result=temp;
+                resultHead=result;
+            }
+            else
+            {
+                result.next=temp;
+                result=result.next;
+            }    
+            
+            node=node.next;
+        }
+        return resultHead;
     }
-     return newHead;   
-    }   
-    public Node copyRandomList(Node head) {   
-    Node node=copyNextItems(head);
-    Node result=copyRandomLinks(node,head);
-    return result;    
-   
+    public Node copyRandomList(Node head) {
+       Node result=null;
+        result=copyNodes(head);
+        fixRandomPointers(head);
+        return result;
         
     }
 }
