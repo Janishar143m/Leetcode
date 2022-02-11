@@ -34,7 +34,7 @@ class Solution {
                      tempSum+=current.val;
                     
                     
-                }
+                } 
                 map.get(sum).next=current.next;
             }
             else
