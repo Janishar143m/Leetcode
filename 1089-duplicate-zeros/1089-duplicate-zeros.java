@@ -2,7 +2,7 @@ class Solution {
     public void duplicateZeros(int[] arr) {
         
         int i=0,n=arr.length;
-        while(i<n)
+        while(i<n-1)
         {
             if(arr[i]==0)
             {
