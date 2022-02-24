@@ -6,6 +6,7 @@ class Solution {
             if(nums[i]==1)
             {
                 ct++;
+                continue;
             }
             else
             {
