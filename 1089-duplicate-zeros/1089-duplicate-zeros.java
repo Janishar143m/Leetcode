@@ -1,33 +1,20 @@
 class Solution {
-    public void duplicateZeros(int[] arr) {
-        int j=arr.length-1;
-        int i=0;
-        if(j==0)
-            return;
-        while(i<j)
-        {
-            if(arr[i]==0)
-            {
-                shiftRight(i,j,arr);
-                arr[i+1]=0;
-                i=i+2;
-                //j--;
+   public void duplicateZeros(int[] arr) {
+        int countZero = 0;
+        for(int i = 0;i<arr.length;i++){
+            if(arr[i] == 0) countZero++;
+        }
+        int len = arr.length + countZero;
+        //We just need O(1) space if we scan from back
+        //i point to the original array, j point to the new location
+        for(int i = arr.length - 1, j = len - 1;i>=0 && j>=0;i--,j--){
+            if(arr[i] != 0){
+                if(j<arr.length) arr[j] = arr[i];
+            }else{
+                if(j<arr.length) arr[j] = arr[i];
+                j--;
+                if(j<arr.length) arr[j] = arr[i];//copy twice when hit '0'
             }
-            else
-                i++;
         }
-        
-    }
-      void shiftRight(int i,int j,int arr[])
-    {
-        int n=arr.length;
-        while(j>=i+1)
-        {
-            if(j<n-1)
-             arr[j+1]=arr[j];
-            j=j-1;
-            
-        }
-        
     }
 }
