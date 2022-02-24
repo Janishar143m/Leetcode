@@ -1,33 +1,33 @@
 class Solution {
     public void duplicateZeros(int[] arr) {
-        
-        int i=0,n=arr.length;
-        while(i<n-1)
+        int j=arr.length-1;
+        int i=0;
+        if(j==0)
+            return;
+        while(i<j)
         {
             if(arr[i]==0)
             {
-                shiftRight(arr,i);
+                shiftRight(i,j,arr);
+                arr[i+1]=0;
                 i=i+2;
-
+                //j--;
             }
-            else 
-                i=i+1;
-            
+            else
+                i++;
         }
         
     }
-    void shiftRight(int arr[],int i)
+      void shiftRight(int i,int j,int arr[])
     {
         int n=arr.length;
-        int j=n-2;
         while(j>=i+1)
         {
-            arr[j+1]=arr[j];
+            if(j<n-1)
+             arr[j+1]=arr[j];
             j=j-1;
             
         }
-        if(i<n-1)
-         arr[i+1]=0;
         
     }
 }
