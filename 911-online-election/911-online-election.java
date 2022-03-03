@@ -22,16 +22,11 @@ class TopVotedCandidate {
     }
 
     public int q(int t) {
-        /*int i;
-        for(i=1;i<persons.length;i++)
-        {
-            if(times[i-1]<=t && times[i]>t)
-                return persons[i-1];
-            else if(times[i]==t)
-                return persons[i];
-        }*/
+       if(!this.treeMap.containsKey(t))
+            t = this.treeMap.lowerKey(t); 
+        return this.treeMap.get(t);
 
-        return this.treeMap.floorEntry(t).getValue();
+        //return this.treeMap.floorEntry(t).getValue();
 
 
     }
