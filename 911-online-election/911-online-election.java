@@ -7,20 +7,21 @@ class TopVotedCandidate {
         int[] maxVotes=new int[persons.length];
         this.persons=new int[persons.length];
         int max=0,maxp=-1;
-        Map<Integer,Integer>map=new HashMap<>();
+        //Map<Integer,Integer>map=new HashMap<>();
         for(int i=0;i<times.length;i++)
         {
-            max=-1;
-            maxp=-1;
+           // max=-1;
+           // maxp=-1;
 
             maxVotes[persons[i]]++;
-            
-            
-                map.put(persons[i],i);
-            
-                
+            //map.put(persons[i],i);
+           if(maxVotes[persons[i]]>=max) 
+           {
+               max=maxVotes[persons[i]];
+               maxp=persons[i];
+           } 
 
-            for(int j=0;j<maxVotes.length;j++)
+            /*for(int j=0;j<maxVotes.length;j++)
             {
                 if(maxVotes[j]>max)
                 {
@@ -35,7 +36,7 @@ class TopVotedCandidate {
                             maxp=j;
                         }
                     }
-            }
+            }*/
             this.persons[i]=maxp;
         }
     }
