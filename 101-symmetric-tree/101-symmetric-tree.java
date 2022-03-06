@@ -14,19 +14,17 @@
  * }
  */
 class Solution {
-    boolean isoMorphic(TreeNode root1,TreeNode root2)
-    {
-        if(root1==null && root2==null)
-           return true;
-        if(root1==null||root2==null)
-            return false;
-  return (root1.val==root2.val) && isoMorphic(root1.left,root2.right) && isoMorphic(root1.right,root2.left);
-
-    }
     public boolean isSymmetric(TreeNode root) {
-        return isoMorphic(root.left,root.right);
-        
-        
-        
+        return isSymmetricUtil(root.left,root.right);
     }
+    public boolean isSymmetricUtil(TreeNode node1,TreeNode node2)
+    {
+        if(node1==null && node2==null)
+            return true;
+        if(node1==null||node2==null)
+            return false;
+        
+        return ((node1.val==node2.val) && isSymmetricUtil(node1.left,node2.right) && isSymmetricUtil(node1.right,node2.left) );
+    }
+    
 }
