@@ -14,30 +14,34 @@
  * }
  */
 class Solution {
-    Map<Integer,Integer> map=new TreeMap<>();
     public int maxLevelSum(TreeNode root) {
-         int maxValue=Integer.MIN_VALUE;
-        int maxLevel=0;
-        maxLevelSumUtility(root,1);
-        for(Map.Entry<Integer,Integer>entry:map.entrySet())
+        int level=1,maxLevel=0,sum=0,maxSum=Integer.MIN_VALUE;
+        Queue<TreeNode> queue=new ArrayDeque<>();
+        Map<Integer,Integer> map=new HashMap<Integer,Integer>();
+        queue.add(root);
+        while(!queue.isEmpty())
         {
-            if(entry.getValue()>maxValue)
+            int size=queue.size();
+            sum=0;
+            for(int i=0;i<size;i++)
             {
-                maxValue=entry.getValue();
-                maxLevel=entry.getKey();
+              TreeNode node=queue.poll();
+               sum+=node.val; 
+                if(node.left!=null)
+                    queue.offer(node.left);
+                if(node.right!=null)
+                    queue.offer(node.right);
+                
+            } 
+            if(sum>maxSum)
+            {
+                maxSum=sum;
+                maxLevel=level;
             }
+            level++;
+            
         }
         return maxLevel;
-            
-        
-    }
-    public void maxLevelSumUtility(TreeNode root,int level)
-    {
-        if(root==null)
-            return;
-        map.put(level,map.getOrDefault(level,0)+root.val);
-        maxLevelSumUtility(root.left,level+1);
-        maxLevelSumUtility(root.right,level+1);
         
     }
 }
