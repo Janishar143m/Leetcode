@@ -20,10 +20,7 @@ class Solution {
              return 0;
         int leftLevel=minDepth(root.left);
         int rightLevel=minDepth(root.right);
-        if(leftLevel==0||rightLevel==0)
-            return leftLevel+rightLevel+1;
-        else
-            return Math.min(leftLevel,rightLevel)+1;
+        return ((leftLevel==0||rightLevel==0)?leftLevel+rightLevel+1:Math.min(leftLevel,rightLevel)+1);
         
     }
 }
