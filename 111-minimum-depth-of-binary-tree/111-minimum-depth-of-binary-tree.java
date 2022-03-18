@@ -25,9 +25,9 @@ class Solution {
     public int minDepthUtil(TreeNode root,int level)
     {
        int leftLevel=level,rightLevel=level;
-        if(root.left!=null)
+        if(root==null)
+            return level-1;
           leftLevel=minDepthUtil(root.left,level+1);
-        if(root.right!=null)
          rightLevel=minDepthUtil(root.right,level+1);
         if(leftLevel==level && rightLevel==level)
             return level;
