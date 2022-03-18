@@ -36,7 +36,7 @@ class Solution {
         List<List<Integer>> result=new ArrayList<>();
         Queue<TreeNode> queue=new ArrayDeque<>();
         queue.offer(root);
-        Boolean leftToRight=false;
+        Boolean leftToRight=true;
         while(!queue.isEmpty())
         {
             int size=queue.size();
@@ -54,17 +54,18 @@ class Solution {
                
                     
                   
+                
+                    if(node.left!=null)
+                   {
+                   
+                       queue.offer(node.left);
+                   }  
                   
                    if(node.right!=null)
                     {
                         queue.offer(node.right);
                         
                     } 
-                    if(node.left!=null)
-                   {
-                   
-                       queue.offer(node.left);
-                   }     
                
             }
           result.add(list);
