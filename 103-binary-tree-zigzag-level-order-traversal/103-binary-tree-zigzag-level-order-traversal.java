@@ -34,50 +34,41 @@ class Solution {
         if(root==null)
             return new ArrayList<>();
         List<List<Integer>> result=new ArrayList<>();
-        Stack<TreeNode> stack=new Stack<>();
-        stack.push(root);
+        Queue<TreeNode> queue=new ArrayDeque<>();
+        queue.offer(root);
         Boolean leftToRight=false;
-        while(stack.size()>0)
+        while(!queue.isEmpty())
         {
-            int size=stack.size();
+            int size=queue.size();
             List<Integer> list=new ArrayList<>();
-            List<TreeNode> list1=new ArrayList<>();
+            //List<TreeNode> list1=new ArrayList<>();
 
             for(int i=0;i<size;i++)
             {
-                TreeNode node=stack.pop();
+                TreeNode node=queue.poll();
                 
-                list.add(node.val);
+                if(leftToRight)
+                  list.add(node.val);
+                else
+                    list.add(0,node.val);
                
                     
-                    if(node.right!=null)
+                  
+                  
+                   if(node.right!=null)
                     {
-                       // stack.push(node.right);
-                        list1.add(0,node.right);
+                        queue.offer(node.right);
                         
-                    }  
-                  if(node.left!=null)
+                    } 
+                    if(node.left!=null)
                    {
-                       //stack.push(node.left);
-                       list1.add(0,node.left);
-                   }
-                       
+                   
+                       queue.offer(node.left);
+                   }     
                
             }
-            list1.stream().forEach(i->stack.push(i));
-            if(leftToRight)
-            {
-                result.add(list);
-            }
-            else
-            {
-                Collections.reverse(list);
-                result.add(list);    
-                
-            }   
-            
-         
-            leftToRight=!leftToRight;
+          result.add(list);
+          leftToRight=!leftToRight;
             
         }
         return result;
