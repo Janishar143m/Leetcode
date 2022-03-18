@@ -15,29 +15,15 @@
  */
 class Solution {
     public int minDepth(TreeNode root) {
+        int level=0;
         if(root==null)
-            return 0;
-        int level=1;
-        int result=minDepthUtil(root,level);
-        return result;
-        
-    }
-    public int minDepthUtil(TreeNode root,int level)
-    {
-       int leftLevel=level,rightLevel=level;
-        if(root==null)
-            return level-1;
-          leftLevel=minDepthUtil(root.left,level+1);
-         rightLevel=minDepthUtil(root.right,level+1);
-        if(leftLevel==level && rightLevel==level)
-            return level;
-        if(leftLevel!=level && rightLevel==level)
-            return leftLevel;
-        if(rightLevel!=level && leftLevel==level)
-            return rightLevel;
+             return 0;
+        int leftLevel=minDepth(root.left);
+        int rightLevel=minDepth(root.right);
+        if(leftLevel==0||rightLevel==0)
+            return leftLevel+rightLevel+1;
         else
-        return Math.min(leftLevel,rightLevel);
-         
+            return Math.min(leftLevel,rightLevel)+1;
         
     }
 }
