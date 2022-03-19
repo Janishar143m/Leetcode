@@ -33,7 +33,10 @@ class Solution {
         List list2=new ArrayList<>(list);
         int newSum=currentSum+root.val;
         if((newSum==targetSum) && (root.left==null && root.right==null))
-            result.add(list);  
+        {
+            result.add(list);
+            return;
+        }   
         pathSumUtil(root.left,targetSum,newSum,list1);
         pathSumUtil(root.right,targetSum,newSum,list2);
     }
