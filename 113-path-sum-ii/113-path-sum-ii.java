@@ -19,11 +19,11 @@ class Solution {
         if(root==null)
             return new ArrayList<>();
         List<Integer>list=new ArrayList<>();
-        pathSumUtil(root,targetSum,0,list);
+        pathSumUtil(root,targetSum,list);
         return result;
         
     }
-    public void pathSumUtil(TreeNode root,int targetSum,int currentSum,List<Integer> list)
+    public void pathSumUtil(TreeNode root,int targetSum,List<Integer> list)
     {
        
         if(root==null)
@@ -31,13 +31,13 @@ class Solution {
         list.add(root.val);
          List list1=new ArrayList<>(list);
         List list2=new ArrayList<>(list);
-        int newSum=currentSum+root.val;
-        if((newSum==targetSum) && (root.left==null && root.right==null))
+        int newSum=targetSum-root.val;
+        if((newSum==0) && (root.left==null && root.right==null))
         {
             result.add(list);
             return;
         }   
-        pathSumUtil(root.left,targetSum,newSum,list1);
-        pathSumUtil(root.right,targetSum,newSum,list2);
+        pathSumUtil(root.left,newSum,list1);
+        pathSumUtil(root.right,newSum,list2);
     }
 }
