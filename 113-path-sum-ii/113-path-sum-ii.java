@@ -29,15 +29,19 @@ class Solution {
         if(root==null)
             return;
         list.add(root.val);
-         List list1=new ArrayList<>(list);
-        List list2=new ArrayList<>(list);
+         //List list1=new ArrayList<>(list);
+        //List list2=new ArrayList<>(list);
         int newSum=targetSum-root.val;
         if((newSum==0) && (root.left==null && root.right==null))
         {
-            result.add(list);
-            return;
-        }   
-        pathSumUtil(root.left,newSum,list1);
-        pathSumUtil(root.right,newSum,list2);
+            result.add(new ArrayList<>(list));
+        
+        }
+        else
+        {
+        pathSumUtil(root.left,newSum,list);
+        pathSumUtil(root.right,newSum,list);
+        }    
+        list.remove(list.size()-1);
     }
 }
