@@ -15,13 +15,16 @@ class Solution {
     private int searchNumber(int a[],int low,int high,int target)
     {
                 int result=-1;
-                int mid=low+(high-low)/2;
+                if(low<=high)
+                {
+                    int mid=low+(high-low)/2;
                 if(a[mid]==target)
                     return mid;
-                else if(low<high && a[mid]>target)
+                else if(a[mid]>target)
                     result=searchNumber(a,low,mid-1,target);
-                else if(low<high && a[mid]<target)
+                else if(a[mid]<target)
                     result=searchNumber(a,mid+1,high,target);
+                }   
                 return result;
                 
     }
