@@ -30,7 +30,6 @@ class Solution {
         if(root.left==null && root.right==null)
         {
              result.add(new StringBuilder(currentString));
-            //System.out.println(currentString);
         }   
         findSumNumbers(root.left,currentString); 
         findSumNumbers(root.right,currentString);
