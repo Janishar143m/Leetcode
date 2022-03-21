@@ -1,38 +1,23 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-class Solution {
-    List<StringBuilder> result=new ArrayList<>();
+public class Solution {
+    int total;
+    
     public int sumNumbers(TreeNode root) {
-        
-        findSumNumbers(root,new StringBuilder());
-        int totSum=result.stream().mapToInt(i->Integer.parseInt(i.toString())).sum();
-        return totSum;
-        
+        total = 0;
+        helper(root, 0);
+        return total;
     }
-    private void findSumNumbers(TreeNode root,StringBuilder currentString)
-    {
-        if(root==null)
-          return;
-         currentString.append(root.val);
-        if(root.left==null && root.right==null)
-        {
-             result.add(new StringBuilder(currentString));
-        }   
-        findSumNumbers(root.left,currentString); 
-        findSumNumbers(root.right,currentString);
-        currentString.deleteCharAt(currentString.length() - 1);        
+    
+    void helper(TreeNode root, int sum) {
+        if (root == null) return;
+        
+        sum = sum * 10 + root.val;
+        
+        if (root.left == null && root.right == null) {
+            total += sum;
+            return;
+        }
+        
+        helper(root.left, sum);
+        helper(root.right, sum);
     }
 }
