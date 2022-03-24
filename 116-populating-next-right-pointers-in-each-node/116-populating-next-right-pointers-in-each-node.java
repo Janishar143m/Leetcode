@@ -23,18 +23,33 @@ class Node {
 
 class Solution {
     public Node connect(Node root) {
-          Node level_start=root;
-        while(level_start!=null){
-            Node cur=level_start;
-            while(cur!=null){
-                if(cur.left!=null) cur.left.next=cur.right;
-                if(cur.right!=null && cur.next!=null) cur.right.next=cur.next.left;
-                
-                cur=cur.next;
+        if(root==null)
+            return null;
+        Node dummy=new Node(-2000);
+        Queue<Node> queue=new ArrayDeque<>();
+        queue.offer(root);
+        queue.offer(dummy);
+        while(queue.size()>0)
+        {
+            Node node=queue.poll();
+            if(node!=dummy)
+            {
+                Node nextNode=queue.peek();
+                if(nextNode!=dummy)
+                    node.next=nextNode;
+                else
+                    node.next=null;
+                if(node.left!=null)
+                    queue.offer(node.left);
+                if(node.right!=null)
+                    queue.offer(node.right);
+            }   
+            else
+            {
+                if(queue.size()>0)
+                    queue.offer(dummy);
             }
-            level_start=level_start.left;
         }
         return root;
-        
     }
 }
