@@ -38,12 +38,14 @@ class Solution {
                 pre.next=node.right;
                 pre=pre.next;
             }
+            if(node.left==null && node.right==null)
+                pre.next=null;
             node=node.next;
             if(node==null)
             {
                 pre=dummy;
                 node=pre.next;
-                pre.next=null;
+                //pre.next=null;
             }
         }
         
