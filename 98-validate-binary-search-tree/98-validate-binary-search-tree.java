@@ -16,21 +16,17 @@
 class Solution {
     TreeNode prev=null;
     public boolean isValidBST(TreeNode root) {
-        boolean result;
-        result=isValidBSTUtil(root);
-        return result;
-    }
-    public boolean isValidBSTUtil(TreeNode root)
-    {
+      
         if(root==null)
             return true;
-        boolean leftBST=isValidBSTUtil(root.left);
+        boolean leftBST=isValidBST(root.left);
         if(leftBST==false)
             return false;
         if(prev!=null && prev.val>=root.val)
             return false;
         prev=root;
-        boolean rightBST=isValidBSTUtil(root.right);
+        boolean rightBST=isValidBST(root.right);
         return rightBST;
     }
+  
 }
