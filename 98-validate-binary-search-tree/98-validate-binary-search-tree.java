@@ -25,10 +25,12 @@ class Solution {
         if(root==null)
             return true;
         boolean leftBST=isValidBSTUtil(root.left);
+        if(leftBST==false)
+            return false;
         if(prev!=null && prev.val>=root.val)
             return false;
         prev=root;
         boolean rightBST=isValidBSTUtil(root.right);
-        return leftBST&&rightBST;
+        return rightBST;
     }
 }
