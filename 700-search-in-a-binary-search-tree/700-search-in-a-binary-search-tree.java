@@ -15,21 +15,11 @@
  */
 class Solution {
     public TreeNode searchBST(TreeNode root, int val) {
-        
-        Queue<TreeNode> queue=new ArrayDeque<>();
-        queue.add(root);
-        while(queue.size()>0)
-        {
-            TreeNode node=queue.poll();
-            if(node.val==val)
-                return node;
-            if(node.left!=null)
-                queue.add(node.left);
-            if(node.right!=null)
-                queue.add(node.right);
-        }
-        return null;
-        
+        if(root==null)
+            return root;
+        if(root.val==val)
+            return root;
+        return (root.val>val)?searchBST(root.left,val):searchBST(root.right,val);
         
     }
 }
