@@ -2,7 +2,8 @@ class Solution {
     public int thirdMax(int[] nums) {
         int max=Integer.MIN_VALUE;
         Queue<Integer> queue=new PriorityQueue<>(Collections.reverseOrder());
-        Arrays.stream(nums).filter(i->!queue.contains(i)).forEach(i->queue.offer(i));
+        Set<Integer> set=new HashSet<>();
+        Arrays.stream(nums).filter(i->!set.contains(i)).forEach(i->{queue.offer(i);set.add(i);});
         int length=queue.size();
         if(length>2)
         {
