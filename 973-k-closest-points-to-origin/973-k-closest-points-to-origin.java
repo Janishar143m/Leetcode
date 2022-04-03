@@ -2,33 +2,22 @@
 class Solution {
     public int[][] kClosest(int[][] points, int k) {
         int result[][];
-        Queue<Point> queue=new PriorityQueue<>((p1,p2)->calc(p1).compareTo(calc(p2)));
+        Queue<int[]> queue=new PriorityQueue<>((p1,p2)->calc(p1).compareTo(calc(p2)));
         for(int i=0;i<points.length;i++)
-           queue.offer(new Point(points[i][0],points[i][1]));
+           queue.offer(points[i]);
         result=new int[k][2];
         for(int i=0;i<k;i++)
         {
-            Point p=queue.poll();
-            result[i][0]=p.x;
-            result[i][1]=p.y;
+            int[] p=queue.poll();
+            result[i][0]=p[0];
+            result[i][1]=p[1];
         
         }
         return result;
         
     }
-    public Double calc(Point p)
+    public Double calc(int [] arr)
     {
-        return Math.sqrt(p.x*p.x+p.y*p.y);
-    }
-}
-
-class Point
-{
-    int x;
-    int y;
-    Point(int x,int y)
-    {
-        this.x=x;
-        this.y=y;
+        return Math.sqrt(arr[0]*arr[0]+arr[1]*arr[1]);
     }
 }
