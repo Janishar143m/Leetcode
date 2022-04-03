@@ -8,9 +8,8 @@ class Solution {
         result=new int[k][2];
         for(int i=0;i<k;i++)
         {
-            int[] p=queue.poll();
-            result[i][0]=p[0];
-            result[i][1]=p[1];
+            result[i]=queue.poll();
+         
         
         }
         return result;
