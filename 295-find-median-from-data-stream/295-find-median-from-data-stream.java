@@ -26,7 +26,7 @@ class MedianFinder {
     public double findMedian() {
         
         if(even)
-            return (double)(queue1.peek()+queue2.peek())/2;
+            return ((double)queue1.peek()/2+(double)queue2.peek()/2);
         else
             return queue1.peek();
         
