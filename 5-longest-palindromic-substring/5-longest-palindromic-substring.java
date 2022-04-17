@@ -5,11 +5,12 @@ class Solution {
         int maxLength=1;
         int maxIndex=0; 
         
-        for(int i=0;i<s.length();i++)
-            dp[i][i]=1;
+       /* for(int i=0;i<s.length();i++)
+            dp[i][i]=1;*/
         
         for(int i=0;i<s.length()-1;i++)
         {
+            dp[i][i]=1;
             if(s.charAt(i)==s.charAt(i+1))
             {
                 dp[i][i+1]=1;
@@ -17,6 +18,7 @@ class Solution {
                 maxIndex=i;
             }   
         }
+        dp[s.length()-1][s.length()-1]=1;
         
         for(int i=2;i<s.length();i++)
             for(int j=0;j<s.length()-i;j++)
