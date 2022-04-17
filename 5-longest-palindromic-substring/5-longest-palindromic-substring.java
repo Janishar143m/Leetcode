@@ -11,7 +11,7 @@ class Solution {
         for(int i=0;i<s.length()-1;i++)
         {
             dp[i][i]=1;
-            if(s.charAt(i)==s.charAt(i+1))
+            if(s.substring(i,i+1).equals(s.substring(i+1,i+2)))
             {
                 dp[i][i+1]=1;
                 maxLength=Math.max(maxLength,2);
