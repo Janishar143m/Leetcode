@@ -1,16 +1,23 @@
 class Solution {
-    public int maxProfit(int[] arr) {
-       int max=0,min=arr[0];
-        for(int i=1;i<arr.length;i++)
+    public int maxProfit(int[] prices) {
+        int n=prices.length;
+        Integer buy=null,sell=null,profit=0;
+        for(int i=0;i<prices.length;i++)
         {
-          if(arr[i]>min)
-          {
-              max+=arr[i]-min;
-              min=arr[i];
-          }   
-           else
-               min=arr[i];
+            while(i<n-1 && prices[i]>=prices[i+1])
+                i++;
+            buy=prices[i];
+            if(i==n)
+                break;
+            while(i<n-1 && prices[i]<=prices[i+1])
+                i++;
+            sell=prices[i];
+            if(buy!=null && sell!=null)
+              profit+=sell-buy;
+            
+            
         }
-        return max;
+        return profit;
+        
     }
 }
