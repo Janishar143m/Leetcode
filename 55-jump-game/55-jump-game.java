@@ -8,7 +8,7 @@ class Solution {
             canReach[i]=false;
            for(int j=0;j<i;j++)
             {
-                if(nums[j]+j>=i && canReach[j]==true)
+                if(nums[j]+j>=i && canReach[j])
                 {
                     canReach[i]=true;
                     break;
