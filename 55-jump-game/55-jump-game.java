@@ -3,6 +3,8 @@ class Solution {
         int n=nums.length;
         boolean[] canReach=new boolean[n];
         canReach[0]=true;
+        if(nums[0]>=n-1)
+            return true;
         for(int i=1;i<n;i++)
         {
             canReach[i]=false;
