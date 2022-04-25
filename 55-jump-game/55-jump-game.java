@@ -1,29 +1,25 @@
 class Solution {
     public boolean canJump(int[] nums) {
         int n=nums.length;
-        boolean[] canReach=new boolean[n];
-        canReach[0]=true;
-        if(nums[0]>=n-1)
+        int noOfSteps=0;
+        if(n<2)
             return true;
-        for(int i=1;i<n;i++)
+        for(int pos=n-2;pos>=0;pos--)
         {
-            canReach[i]=false;
-           for(int j=0;j<i;j++)
+            if(nums[pos]==0)
             {
-                if(nums[j]+j>=i && canReach[j])
+                noOfSteps=1;
+                while(noOfSteps>nums[pos])
                 {
-                    canReach[i]=true;
-                    break;
-                }    
+                    noOfSteps++;
+                    pos--;
+                    if(pos<0)
+                        return false;
+                }
             }
-            if(canReach[i] && nums[i]+i>=n-1)
-            {
-                canReach[n-1]=true;
-                break;
-            }
-                    
-      }
-      return canReach[n-1];  
+        }
+        return true;
+        
         
     }
 }
