@@ -6,8 +6,6 @@ class Solution {
         minSteps[0]=0;
         if(nums.length==1)
             return 0;
-        if(nums[0]>=nums.length-1)
-            return 1;
         for(int i=1;i<nums.length;i++)
         {
             minSteps[i]=100000000;
