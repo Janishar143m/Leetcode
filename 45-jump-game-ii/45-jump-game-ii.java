@@ -2,7 +2,7 @@ class Solution {
     public int jump(int[] nums) {
         
         int[] minSteps=new int[nums.length];
-        Arrays.fill(minSteps,Integer.MAX_VALUE-1);
+        Arrays.fill(minSteps,100000000);
         minSteps[0]=0;
         for(int i=1;i<nums.length;i++)
         {
