@@ -8,7 +8,7 @@ class Solution {
         {
             minSteps[i]=100000000;
             for(int j=0;j<i;j++)
-                if(nums[j]>=i-j)
+                if(nums[j]>=i-j && minSteps[j]!=100000000)
                     minSteps[i]=Math.min(minSteps[i],1+minSteps[j]);
         }
         return minSteps[nums.length-1];
