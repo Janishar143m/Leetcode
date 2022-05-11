@@ -26,7 +26,9 @@ class Solution {
         Arrays.sort(words,(s1,s2)->s1.length()-s2.length());
         //Arrays.stream(words).forEach(System.out::println);
         int[] dp=new int[words.length];
-        Arrays.fill(dp,1);
+        for(int i=0;i<dp.length;i++)
+            dp[i]=1;
+        //Arrays.fill(dp,1);
         max=dp[0];
         for(int i=0;i<words.length;i++)
         {
