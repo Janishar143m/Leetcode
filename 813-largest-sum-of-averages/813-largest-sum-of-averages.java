@@ -1,45 +1,30 @@
 class Solution {
-    public double largestSumOfAverages(int[] nums, int k) {
-        int n=nums.length;
-        if(k>n)
+    double [][]dp;
+    public double largestSumUtil(int i,int k,int[] nums)
+    {
+        if(i==nums.length)
             return 0;
-        double dp[][]=new double[n+1][n+1];
-       // Arrays.sort(nums);
+        if(k==0)
+            return Integer.MIN_VALUE;
+        if(dp[i][k]!=0)
+            return dp[i][k];
         double sum=0;
-        for(int i=1;i<=n;i++)
+        double avg=0;
+        for(int j=i;j<nums.length;j++)
         {
-            dp[i][i]=nums[i-1]+sum;
-            sum=dp[i][i];
+            sum+=nums[j];
+            avg=Math.max(avg,sum/(j-i+1)+largestSumUtil(j+1,k-1,nums));
+            
         }
-        sum=0;
-        double prevsum=0;
-        for(int i=1;i<=n;i++)
-        {
-            sum=prevsum+nums[i-1];
-            dp[i][1]=sum/i;
-            prevsum=sum;
-        }
-        for(int i=1;i<=n;i++)
-            for(int j=1;j<=n;j++)
-            {
-                if(j!=1 && i>j)
-                {
-                   sum=0;
-                    int ct=0;
-                    for(int l=i;l>=1;l--)
-                   {
-                    sum+=nums[l-1];
-                    ct++;
-                    if(i-ct>=0)    
-                       dp[i][j]=Math.max(dp[i][j],sum/ct+dp[i-ct][j-1]);
-                   }
-                }
-                if (i==n && j==k)
-                    break;
-                   
-            }
-        return dp[n][k];
+        dp[i][k]=avg;
+        return avg;
+    }
+    public double largestSumOfAverages(int[] nums, int k) {
         
+        double result;
+        dp=new double[nums.length+1][nums.length+1];
+        result=largestSumUtil(0,k,nums);
+        return result;
         
     }
 }
