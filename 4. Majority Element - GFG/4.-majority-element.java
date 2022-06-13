@@ -38,7 +38,8 @@ class Solution
         
         int majority=a[0];
         int ct=0;
-        int maxCount=0;
+        final long maxCount;
+        //final long element;
         for(int i=0;i<size;i++)
         {
             if(a[i]==majority)
@@ -54,10 +55,14 @@ class Solution
                 ct=1;
             }
         }
-       for(int i=0;i<size;i++)
+        final long max=majority;
+       /*for(int i=0;i<size;i++)
         if(a[i]==majority)
-          maxCount++;
-       return maxCount>size/2?majority:-1;      
+          maxCount++;*/
+       maxCount=Arrays.stream(a).filter(e->e==max).count();
+      // System.out.println(maxCount);
+       return (int)maxCount>size/2?majority:-1;
+       //maxCount>(long)size/2?majority:-1;      
         
     }
 }
