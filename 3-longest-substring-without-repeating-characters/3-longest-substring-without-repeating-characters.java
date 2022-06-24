@@ -16,7 +16,7 @@ class Solution {
             }   
             else
             {
-                if(map.get(s.charAt(endWindow))+1>startWindow)
+                if(map.get(s.charAt(endWindow))>=startWindow)
                      startWindow=map.get(s.charAt(endWindow))+1;
                 map.put(s.charAt(endWindow),endWindow);
                 //startWindow=map.get();    
