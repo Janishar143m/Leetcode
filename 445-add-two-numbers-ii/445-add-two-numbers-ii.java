@@ -9,73 +9,67 @@
  * }
  */
 class Solution {
-    
-    public int size(ListNode head)
-    {
-        int len=0;
-        while(head!=null)
-        {
-            len++;
-            head=head.next;
-        }
-        return len;
-    }
-    
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         
-        int len1=size(l1);
-        int len2=size(l2);
-        ListNode temp=null,resHead=null;
-        while(l1!=null||l2!=null)
+        Stack<Integer> s1=new Stack<>();
+        Stack<Integer> s2=new Stack<>();
+        while(l1!=null)
         {
-            int v1=0,v2=0;
-            if(len1>=len2)
-            {
-                v1=l1.val;
-                l1=l1.next;
-                 len1--;   
-            }
-            if(len2>=len1+1)
-            {
-                v2=l2.val;
-                l2=l2.next;
-                len2--;
-            }
-            temp=new ListNode(v1+v2);
-            temp.next=resHead;
-            resHead=temp;
+            s1.push(l1.val);
+            l1=l1.next;
+        }
+        while(l2!=null)
+        {
+            s2.push(l2.val);
+            l2=l2.next;
+        }
+        int carry=0;
+        ListNode prev=new ListNode(-1);
+        ListNode temp=prev;
+        while(!s1.isEmpty() || !s2.isEmpty())
+        {
+            ListNode sum=new ListNode();
+            prev.next=sum;
+            sum.val+=carry;
+            //System.out.println("Popped element1:"+s1.peek());
+            //System.out.println("Popped element2:"+s2.peek());
+            if(!s1.isEmpty())
+                sum.val+=s1.pop();
+            if(!s2.isEmpty())
+                sum.val+=s2.pop();
+             //System.out.println("Digit sum:"+sum.val);
+            carry=sum.val/10;
+            sum.val=sum.val%10;
+            //System.out.println("Carry:"+carry);
+            //System.out.println("Sum:"+sum.val);
+            prev=sum;
+        }
+        if(carry!=0)
+        {
+            ListNode sum=new ListNode(carry);
+            prev.next=sum;
+        }   
+        
+       ListNode res=reverseList(temp.next);
+       // System.out.println(temp.next.val);
+        return res;
+        
+    }
+    private ListNode reverseList(ListNode start)
+    {
+        ListNode prevNode=null;
+         ListNode temp=null;
+        ListNode node=start;
+         //System.out.println(node.val);
+        while(node!=null)
+        {
+            temp=node.next;
+            node.next=prevNode;
+            prevNode=node;
+            node=temp;
+            //System.out.println(node.val);
             
         }
-       // return temp;
-        int carry=0;
-        resHead=null;
-        while(temp!=null)
-        {
-            int tempVal=temp.val+carry;
-            if(tempVal>9)
-            {
-                temp.val=tempVal%10;
-                carry=tempVal/10;
-            }
-            else
-            {
-                temp.val=tempVal;
-                carry=0;
-            }
-                
-            ListNode prev=temp.next;
-            temp.next=resHead;
-            resHead=temp;
-            temp=prev;
-        }
-        if(carry>0)
-        {
-            temp=new ListNode(carry);
-            temp.next=resHead;
-            resHead=temp;
-            //temp.next=null;
-        }
-        return resHead;
-        
+        return prevNode;
     }
 }
