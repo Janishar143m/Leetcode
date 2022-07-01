@@ -28,7 +28,7 @@ class Solution {
         for(int i=0;i<k;i++)
             fast=fast.next;
         
-        while(fast.next!=null && fast!=null)
+        while(fast.next!=null)
         {
             fast=fast.next;
             slow=slow.next;
