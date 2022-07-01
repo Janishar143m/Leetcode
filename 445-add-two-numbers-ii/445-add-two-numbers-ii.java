@@ -11,32 +11,30 @@
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         
-        Stack<Integer> s1=new Stack<>();
-        Stack<Integer> s2=new Stack<>();
-        while(l1!=null)
-        {
-            s1.push(l1.val);
-            l1=l1.next;
-        }
-        while(l2!=null)
-        {
-            s2.push(l2.val);
-            l2=l2.next;
-        }
-        int carry=0;
+        //Stack<Integer> s1=new Stack<>();
+        //Stack<Integer> s2=new Stack<>();
+        l1=reverseList(l1);
+        l2=reverseList(l2);
         ListNode prev=new ListNode(-1);
         ListNode temp=prev;
-        while(!s1.isEmpty() || !s2.isEmpty())
+        int carry=0;
+        while(l1!=null||l2!=null)
         {
             ListNode sum=new ListNode();
             prev.next=sum;
             sum.val+=carry;
             //System.out.println("Popped element1:"+s1.peek());
             //System.out.println("Popped element2:"+s2.peek());
-            if(!s1.isEmpty())
-                sum.val+=s1.pop();
-            if(!s2.isEmpty())
-                sum.val+=s2.pop();
+            if(l1!=null)
+            {
+                sum.val+=l1.val;
+                l1=l1.next;
+            }  
+            if(l2!=null)
+            {
+                sum.val+=l2.val;
+                l2=l2.next;
+            }   
              //System.out.println("Digit sum:"+sum.val);
             carry=sum.val/10;
             sum.val=sum.val%10;
