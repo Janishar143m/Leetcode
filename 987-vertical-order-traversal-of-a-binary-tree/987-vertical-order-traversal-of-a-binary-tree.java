@@ -14,7 +14,7 @@
  * }
  */
 class Solution {
-    Map<Integer,Map<Integer,PriorityQueue<Integer>>> map=new TreeMap<Integer,Map<Integer,PriorityQueue<Integer>>>();
+    Map<Integer,Map<Integer,PriorityQueue<Integer>>> map=new TreeMap<>();
     public List<List<Integer>> verticalTraversal(TreeNode root) {
         List<List<Integer>> result;
         verticalTraversalUtil(root,0,0);
