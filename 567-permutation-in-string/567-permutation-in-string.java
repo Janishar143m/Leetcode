@@ -12,24 +12,8 @@ class Solution {
             for(int j=i;j<i+n1;j++)
                 map2.put(s2.charAt(j),map2.getOrDefault(s2.charAt(j),0)+1);
             
-            
-            for(Map.Entry<Character,Integer>mp:map1.entrySet())
-            {
-                Character c=mp.getKey();
-                int freq=mp.getValue();
-                if(map2.containsKey(c) && map2.getOrDefault(c,0)==freq)
-                    flag=true;
-                else
-                {
-                    flag=false;
-                    break;
-                }   
-                    
-            }
-            if(flag)
+            if(map1.equals(map2))
                 return true;
-            
-                
         }
         return false;
         
