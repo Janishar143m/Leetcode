@@ -8,14 +8,19 @@ class Solution {
         Map<Character,Integer>windowMap=new HashMap<>();
         for(int i=0;i<t.length();i++)
             resultMap.put(t.charAt(i),resultMap.getOrDefault(t.charAt(i),0)+1);
-        need=t.length();
+        need=resultMap.size();
         for(int rightWindow=0;rightWindow<s.length();rightWindow++)
         {
                            windowMap.put(s.charAt(rightWindow),windowMap.getOrDefault(s.charAt(rightWindow),0)+1);
-            if(resultMap.containsKey(s.charAt(rightWindow)) && resultMap.get(s.charAt(rightWindow))>=windowMap.get(s.charAt(rightWindow)))
-                have++;
+            if(resultMap.containsKey(s.charAt(rightWindow)) && resultMap.get(s.charAt(rightWindow))-windowMap.getOrDefault(s.charAt(rightWindow),0)==0)
+            {
+          have++;
+                
+                
+            } 
             while(have==need)
             {
+                //System.out.println("Inside have==need");
                 if(rightWindow-leftWindow+1<minLen)
                 {
                     leftpos=leftWindow;
@@ -23,7 +28,7 @@ class Solution {
                 }
                
                                          windowMap.put(s.charAt(leftWindow),windowMap.getOrDefault(s.charAt(leftWindow),0)-1);
-
+ //System.out.println("Value decremented for "+s.charAt(leftWindow)+"Now frequency //is:"+windowMap.getOrDefault(s.charAt(leftWindow),0));
                 
                  if(resultMap.containsKey(s.charAt(leftWindow)) && resultMap.get(s.charAt(leftWindow))>windowMap.get(s.charAt(leftWindow)))
                 have--;
