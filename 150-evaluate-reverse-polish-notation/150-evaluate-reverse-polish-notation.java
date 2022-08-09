@@ -1,39 +1,45 @@
 class Solution {
+    Stack<Integer> stack=new Stack<>();
     public int evalRPN(String[] tokens) {
-        int res=0;
-        Stack<Integer> stack=new Stack<>();
+        
         for(int i=0;i<tokens.length;i++)
         {
-            String c=tokens[i];
-            if(c.equals("+")||c.equals("-")||c.equals("*")||c.equals("/"))
+            String str=tokens[i];
+           // System.out.println(str);
+            //System.out.println("Stack before operation:"+stack.toString());
+            if(str.equals("+")||str.equals("-")||str.equals("*")||str.equals("/"))
             {
-                if(stack.size()>1)
+                int result=0;
+                if(stack.size()>=2)
                 {
                     
-                    int oper1=stack.pop();
-                    int oper2=stack.pop();
-                   //System.out.println(oper1);
-                   // System.out.println(oper2);
-                    //System.out.println(c);
-                    int result=0;
-                    if(c.equals("+"))
-                      result=oper1+oper2;
-                    else if(c.equals("-"))
-                        result=oper2-oper1;
-                    else if(c.equals("/"))
-                        result=oper2/oper1;
-                    else if (c.equals("*"))
-                        result=oper1*oper2;
+                    Integer i1=stack.pop();
+                    Integer i2=stack.pop();
+                    switch(str)
+                    {
+                        case "+":
+                            result=i1+i2;
+                            break;
+                        case "-":
+                            result=i2-i1;
+                            break;
+                        case "/":
+                           result=i2/i1;
+                            break;
+                        case "*":
+                            result=i2*i1;
+                            break;
+                        
+                    }
                     //System.out.println(result);
                     stack.push(result);
+                    //System.out.println("Stack after operation:"+stack.toString());
                 }
-                    
             }
             else
-                stack.push(Integer.parseInt(c));
+                stack.push(Integer.parseInt(str));
         }
         return stack.pop();
-        
         
     }
 }
