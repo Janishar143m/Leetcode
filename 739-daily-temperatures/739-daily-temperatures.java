@@ -5,17 +5,14 @@ class Solution {
         int result[]=new int[temperatures.length];
         for(int i=0;i<temperatures.length;i++)
         {
-            if(stack.isEmpty())
-                stack.push(i);
-            else
+           
+            while(!stack.isEmpty()&& temperatures[stack.peek()]<temperatures[i])
             {
-                while(!stack.isEmpty()&& temperatures[stack.peek()]<temperatures[i])
-            {
-                result[stack.peek()]=i-stack.peek();
-                stack.pop();
+                result[stack.peek()]=i-stack.pop();
+                //stack.pop();
                 
             }
-            }
+            
             stack.push(i);
                 
                 
