@@ -1,50 +1,39 @@
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        
-      if(nums1.length==0 && nums2.length==0)
-          return 0;
-       if(nums1.length==0)
-       {
-           int n=nums2.length;
-           return nums2[(n-1)/2]*0.5+nums2[n/2]*0.5;
-       }
-       else if(nums2.length==0)
-       {
-           int n=nums1.length;
-           return nums1[(n-1)/2]*0.5+nums1[n/2]*0.5;
-       }
-      if (nums1.length>nums2.length)
-          return findMedianSortedArrays(nums2,nums1);
-      else
-      {
-          int m=nums1.length;
-          int n=nums2.length;
-          int left=0;
-          int right=m;
-          while(left<right)
-          {
-              int i=(left+right)/2;
-              int j=(m+n)/2-i;
-              if(nums1[i]<nums2[j-1])
-                  left=i+1;
-              else
-                  right=i;
-          }
-          int first=left;
-          int second=(m+n)/2-first;
-          int shorterLeft=(first==0)?Integer.MIN_VALUE:nums1[first-1];
-          int shorterRight=(first==m)?Integer.MAX_VALUE:nums1[first];
-          int longerLeft=(second==0)?Integer.MIN_VALUE:nums2[second-1];
-          int longerRight=(second==n)?Integer.MAX_VALUE:nums2[second];
-          
-          if((m+n)%2==1)
-              return Math.min(shorterRight,longerRight);
-          else
-              return Math.max(shorterLeft,longerLeft)*0.5+Math.min(shorterRight,longerRight)*0.5;
-          
-          }
-      }
-        
-        
+        int m=nums1.length;
+        int n=nums2.length;
+        if(m>n)
+            return findMedianSortedArrays(nums2,nums1);
+        int tot=m+n;
+        int half=(tot+1)/2;
+        int left=0;
+        int right=m;
+        while(left<=right)
+        {
+            int i=left+(right-left)/2;
+            int j=half-i;
+            int left1=i>0?nums1[i-1]:Integer.MIN_VALUE;
+            int right1=i<m?nums1[i]:Integer.MAX_VALUE;
+            int left2=j>0?nums2[j-1]:Integer.MIN_VALUE;
+            int right2=j<n?nums2[j]:Integer.MAX_VALUE;
+            if(left1<=right2 && left2<=right1)
+            {
+                if(tot%2==0)
+                {
+                    return (double)(Math.max(left1,left2)+Math.min(right1,right2))/2;
+                    
+                }
+                else
+                    return Math.max(left1,left2);
+                
+            }
+            else if(left1>right2)
+                right=i-1;
+            else
+                left=i+1;
+                
+        }
+        return -1;
         
     }
+}
