@@ -14,46 +14,30 @@ class Node {
 */
 
 class Solution {
-     Map<Node,Node>map=new HashMap<>();
-    public void fixRandomPointers(Node head)
-    {
-        Node node=head;
-        while(node!=null)
-        {
-            map.get(node).random=map.get(node.random);
-            node=node.next;
-        }
-        
-    }
-    public Node copyNodes(Node head)
-    {
-         Node node=head;
-        Node result=null;
-     Node resultHead=null;
-        while(node!=null)
-        {
-            Node temp=new Node(node.val);
-            map.put(node,temp);
-            if(resultHead==null)
-            {
-                result=temp;
-                resultHead=result;
-            }
-            else
-            {
-                result.next=temp;
-                result=result.next;
-            }    
-            
-            node=node.next;
-        }
-        return resultHead;
-    }
     public Node copyRandomList(Node head) {
-       Node result=null;
-        result=copyNodes(head);
-        fixRandomPointers(head);
-        return result;
+        Map<Node,Node> map=new HashMap<>();
+        Node prev=null;
+        Node node=head;
+        Node first=null;
+        while(node!=null)
+        {
+            Node node1=new Node(node.val);
+            if(first==null)
+                first=node1;
+            if(prev!=null)
+                prev.next=node1;
+            map.put(node,node1);
+            prev=node1;
+            node=node.next;
+        }
+       
+        while(head!=null)
+        {
+            map.get(head).random=map.get(head.random);
+            head=head.next;
+        }
+        return first;
+        
         
     }
 }
