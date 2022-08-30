@@ -14,7 +14,7 @@ class Solution {
         ListNode result=null;
         ListNode resultHead=null;
         int carry=0;
-        while(l1!=null || l2!=null||carry!=0)
+        while(l1!=null || l2!=null)
         {
             
             int tot=0;
@@ -42,6 +42,9 @@ class Solution {
             if(l2!=null)
              l2=l2.next;
         }
+        
+        if(carry!=0)
+            result.next=new ListNode(carry);
         return resultHead;
         
     }
