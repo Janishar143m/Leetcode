@@ -11,26 +11,22 @@
  */
 public class Solution {
     public boolean hasCycle(ListNode head) {
-        int flag=0;
-        int visited=Integer.MAX_VALUE;
-        while(head!=null)
+        
+        ListNode slow=head;
+        ListNode fast=head;
+        if(head==null||head.next==null)
+            return false;
+   
+        while(fast!=null && fast.next!=null)
         {
-           if(head.val!=visited)
-           {
-               head.val=visited;
-               
-           }
-            else
-            {
-                flag=1;
+            slow=slow.next;
+            fast=fast.next.next;
+            if(slow==fast)
                 break;
-            }
-            head=head.next;
         }
-        if(flag==1)
+        if(fast!=null && slow==fast)
             return true;
         else
             return false;
-        
     }
 }
