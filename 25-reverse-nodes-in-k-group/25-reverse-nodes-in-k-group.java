@@ -9,43 +9,65 @@
  * }
  */
 class Solution {
-    public int findSize(ListNode head)
-    {
-        int size=0;
-        while(head!=null)
-        {
-            size++;
-            head=head.next;
-        }
-        return size;
-    }
-    
+    ListNode nextNode;
     public ListNode reverseKGroup(ListNode head, int k) {
-        int size=findSize(head);
-        if(head==null||head.next==null||k==1)
-            return head;
-        ListNode node=head;
-        ListNode root=null;
-        ListNode prev=null;
-         ListNode start=null;
-        if(size>=k)
-        {
-            prev=null;
-            start=node;
-            for(int i=0;i<k;i++)
-            {
-                ListNode temp=node.next;
-                node.next=prev;
-               prev=node;
-                node=temp;
-            }
-            start.next=reverseKGroup(node,k);
-        }
         
-        if(size<k)
-            return node;
+        if(head==null)
+            return null;
+        if(k==1)
+            return head;
+        ListNode tail=reverse(head,k);
+        if(nextNode!=null)
+         head.next=reverseKGroup(nextNode,k);
+        return tail;
+        
+    }
+    private boolean checkLength(ListNode node,int k)
+    {
+        int i=1;
+        for(i=1;i<=k;i++)
+        {
+            if(node==null)
+                break;
+            node=node.next;
+        }
+        if(i<=k)
+            return false;
         else
+            return true;
+        
+    }
+    private ListNode reverse(ListNode node,int k)
+    {
+       
+        boolean result=checkLength(node,k);
+       // System.out.println("result is:"+result);
+         nextNode=null;
+        if(result)
+        {
+            ListNode prev=null;
+             ListNode next=null;
+            for(int i=1;i<=k;i++)
+        {
+           if(node!=null)     
+           {
+               next=node.next;
+            node.next=prev;
+                prev=node;
+                node=next;
+           }
+        }
+            nextNode=next;
+            //if(nextNode!=null)
+              //System.out.println("Next node is:"+nextNode.val);
             return prev;
-   
+        }
+        else
+        {
+           
+            return node;
+        }  
+            
+      
     }
 }
