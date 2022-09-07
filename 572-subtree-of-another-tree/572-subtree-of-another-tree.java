@@ -16,24 +16,40 @@
 class Solution {
     public boolean isSubtree(TreeNode root, TreeNode subRoot) {
         
-         if (root == null) {
-    return subRoot == null;
-  }
-        return isSame(root,subRoot)||isSubtree(root.left,subRoot)||isSubtree(root.right,subRoot);
-            
+        TreeNode node=root;
+         boolean res=isSubtreeUtil(node,subRoot);
+        if(res)
+            return true;
+        if(root.left!=null)
+        {
+            boolean left=isSubtree(root.left,subRoot);
+        if(left)
+            return true;
+        }   
+        
+        if(root.right!=null)
+        {
+               boolean right=isSubtree(root.right,subRoot);
+             if(right)
+               return true;
+        }    
+      
+        
+         
+         return false;
+        
         
     }
-    
-    public boolean isSame(TreeNode t1,TreeNode t2)
+     private boolean isSubtreeUtil(TreeNode root,TreeNode subRoot)
     {
-        if(t1==null && t2==null) return true;
-        if(t1==null||t2==null)
+        if(root==null && subRoot==null)
+            return true;
+         if(root==null||subRoot==null)
+             return false;
+        if(root.val==subRoot.val)
+            return isSubtreeUtil(root.left,subRoot.left)&& isSubtreeUtil(root.right,subRoot.right);
+        else
             return false;
-        if(t1.val!=t2.val)
-            return false;
-        return isSame(t1.left,t2.left) && isSame(t1.right,t2.right);
-        
-        
+    }  
+   
     }
-    
-}
