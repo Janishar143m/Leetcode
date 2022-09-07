@@ -15,30 +15,15 @@
  */
 class Solution {
     public boolean isSubtree(TreeNode root, TreeNode subRoot) {
-        
-        TreeNode node=root;
-         boolean res=isSubtreeUtil(node,subRoot);
+         if(root==null && subRoot==null)
+            return true;
+         if(root==null||subRoot==null)
+             return false;
+         boolean res=isSubtreeUtil(root,subRoot);
         if(res)
             return true;
-        if(root.left!=null)
-        {
-            boolean left=isSubtree(root.left,subRoot);
-        if(left)
-            return true;
-        }   
-        
-        if(root.right!=null)
-        {
-               boolean right=isSubtree(root.right,subRoot);
-             if(right)
-               return true;
-        }    
-      
-        
-         
-         return false;
-        
-        
+        return isSubtree(root.left,subRoot)|| isSubtree(root.right,subRoot);
+       
     }
      private boolean isSubtreeUtil(TreeNode root,TreeNode subRoot)
     {
