@@ -14,19 +14,28 @@
  * }
  */
 class Solution {
-    TreeNode prev=null;
+     TreeNode prev=null;
     public boolean isValidBST(TreeNode root) {
-      
+        
+       
+        return isValidBSTUtil(root);
+        
+    }
+    
+    private boolean isValidBSTUtil(TreeNode root)
+    {
         if(root==null)
             return true;
-        boolean leftBST=isValidBST(root.left);
-        if(leftBST==false)
+        boolean left=isValidBSTUtil(root.left);
+        if(!left)
             return false;
         if(prev!=null && prev.val>=root.val)
             return false;
         prev=root;
-        boolean rightBST=isValidBST(root.right);
-        return rightBST;
+        boolean right=isValidBSTUtil(root.right);
+        if(!right)
+            return false;
+        return true;
+        
     }
-  
 }
