@@ -40,14 +40,13 @@ class WordDictionary {
                    {
                        result=searchUtil(word.substring(i+1),node.nodes[j]);
                        if(result)
-                           break;
+                          return true;
                         
                    }   
                }
-            if(!result)
+          
                 return false;
-             else
-                 return true;
+            
                 
             }
             node=node.nodes[c-'a'];
