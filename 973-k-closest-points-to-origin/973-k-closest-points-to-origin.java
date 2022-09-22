@@ -1,6 +1,6 @@
 class Solution {
     
-    Queue<Point> queue=new PriorityQueue<>((a,b)->calc(a).compareTo(calc(b)));
+    Queue<Point> queue=new PriorityQueue<>((a,b)->new Double(Math.sqrt(Math.pow(a.x,2)+Math.pow(a.y,2))).compareTo(new Double(Math.sqrt(Math.pow(b.x,2)+Math.pow(b.y,2)))));
     
     public int[][] kClosest(int[][] points, int k) {
         
@@ -12,18 +12,13 @@ class Solution {
         for(int i=0;i<k;i++)
         {
             Point p=queue.poll();
-            result[i][0]=p.x;
-             result[i][1]=p.y;
+            result[i][0]=(int)p.x;
+             result[i][1]=(int)p.y;
         }   
         
         return result;
         
     }
-                                           
-     private Double calc(Point p)
-                                           {
-                                               return Math.sqrt(Math.pow(p.x,2)+Math.pow(p.y,2));
-                                           }                                     
     class Point
     {
         int x;
