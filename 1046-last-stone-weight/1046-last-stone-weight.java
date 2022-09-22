@@ -1,20 +1,17 @@
 class Solution {
+    Queue<Integer> queue=new PriorityQueue<>((a,b)->b-a);
     public int lastStoneWeight(int[] stones) {
         
-        Queue<Integer> queue= new PriorityQueue<>(Collections.reverseOrder());
-        Arrays.stream(stones).forEach(i->queue.offer(i));
-        int wt1=-1,wt2=-1;
+        for(Integer num:stones)
+            queue.offer(num);
         while(queue.size()>1)
         {
-            wt1=queue.poll();
-            wt2=queue.poll();
-            //System.out.println(wt1);
-            //System.out.println(wt2);
-            if(wt1>=wt2)
+            int wt1=queue.poll();
+            int wt2=queue.poll();
+            if(wt1!=wt2)
                 queue.offer(wt1-wt2);
-            
         }
-        return queue.peek();
+        return queue.isEmpty()?0:queue.peek();
         
     }
 }
