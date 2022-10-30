@@ -13,17 +13,16 @@ class Solution {
     
     private void findCombinations(int[] candidates,int index,int target,List<Integer>list,List<List<Integer>> combinations)
     {
-        if(target<0||index==candidates.length)
+        if(index==candidates.length)
         {
             return;
         }
         else if(target==0)
         {
             
-            if(!combinations.contains(list))
-            {
+           
                  combinations.add(new ArrayList<>(list));
-            }    
+               
         } 
         else
         {
@@ -31,7 +30,7 @@ class Solution {
         if(target-candidates[index]>=0)
         {
             list.add(candidates[index]);
-            findCombinations(candidates,index+1,target-candidates[index],list,combinations);
+            //findCombinations(candidates,index+1,target-candidates[index],list,combinations);
             findCombinations(candidates,index,target-candidates[index],list,combinations);
             list.remove(list.size()-1);
 
