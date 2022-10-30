@@ -6,20 +6,7 @@ class Solution {
          List<List<Integer>> result=new ArrayList<>();
         findCombinations(candidates,0,target,list,combinations);
         //System.out.println("Result combinations size is:"+combinations.size());
-        for(List<Integer> list1:combinations)
-        {
-           // System.out.println("List is :"+list1);
-            int sum=-1;
-            sum = list1.stream().mapToInt(Integer::valueOf).sum();
-            //System.out.println("Sum is :"+sum);
-            if(sum==target)
-            {
-                //System.out.println("Condition is true");
-                result.add(list1);
-                
-            } 
-        }
-        return result;
+        return combinations;
         
         
         
