@@ -2,14 +2,16 @@ class Solution {
     public List<List<Integer>> permute(int[] nums) {
         List<Integer> list=new ArrayList<>();
         List<List<Integer>> result=new ArrayList<>();
-        permuteHelper(nums,list,result);
+        Boolean[] used=new Boolean[nums.length];
+        Arrays.fill(used,false);
+        permuteHelper(nums,list,result,used);
         return result;
         
         
         
     }
     
-    private void permuteHelper(int[]nums,List<Integer>list,List<List<Integer>> result)
+    private void permuteHelper(int[]nums,List<Integer>list,List<List<Integer>> result,Boolean[] used)
     {
         
         if(list.size()==nums.length)
@@ -18,11 +20,13 @@ class Solution {
         {
             for(int i=0;i<nums.length;i++)
             {
-                if(!list.contains(nums[i]))
+                if(!used[i])
                 {
                     list.add(nums[i]);
-                    permuteHelper(nums,list,result);
+                    used[i]=true;
+                    permuteHelper(nums,list,result,used);
                     list.remove(list.size()-1);
+                    used[i]=false;
                 }
                 
                 
