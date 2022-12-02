@@ -15,6 +15,8 @@ class Solution {
         {
             result.add(new ArrayList<>(list));
         }
+        if(sum>target)
+            return;
        for(int i=idx;i<candidates.length;i++)
        {
            if(i>idx && candidates[i]==candidates[i-1])
