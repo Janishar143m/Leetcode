@@ -51,13 +51,17 @@ class Solution {
     }
     private void createLinks(Node node)
     {
-        for(Node neighbor:node.neighbors)
+        for(Map.Entry<Node,Node>mp:map.entrySet())
         {
-            map.get(node).neighbors.add(map.get(neighbor));
-            if(map.get(neighbor).neighbors.size()==0)
+           Node original=mp.getKey();
+            Node clone=mp.getValue();
+            if(original.neighbors.size()>0)
             {
-                createLinks(neighbor);
-            }   
+                for(Node neighbor:original.neighbors)
+                {
+                    clone.neighbors.add(map.get(neighbor));
+                }
+            }
         }       
         
     }
