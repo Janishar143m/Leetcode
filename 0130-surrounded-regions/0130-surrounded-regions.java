@@ -13,26 +13,21 @@ class Solution {
                   
                 }
             }
-        for(int i=1;i<row;i++)
+        for(int i=0;i<row;i++)
         {
-            for(int j=1;j<col;j++)
+            for(int j=0;j<col;j++)
             {
                 if(board[i][j]=='O')
                     board[i][j]='X';
-        
-            }
-        }
-        
-        
-         for(int i=0;i<row;i++)
-            for(int j=0;j<col;j++)
-            {
-                if( board[i][j]=='T')
+                 else if(board[i][j]=='T')
                 {
                    board[i][j]='O';
                   
                 }
+        
             }
+        }
+        
         
         
     }
