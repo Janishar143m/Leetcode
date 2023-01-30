@@ -1,58 +1,45 @@
 class Solution {
-    public int[] findOrder(int numCourses, int[][] prerequisites) {
-        
-        List<Integer> adj[]=new ArrayList[numCourses];
-        List<Integer> next[]=new ArrayList[numCourses];
-        List<Integer> result=new ArrayList<>();
-        int k=0;
-        boolean flag=false;
-        Queue<Integer> queue= new LinkedList<>();
-        
-        for(int i=0;i<numCourses;i++)
+    public int[] findOrder(int n, int[][] p) {
+        List<List<Integer>> nm=new ArrayList<>();
+        for(int i=0;i<n;i++)
         {
-            adj[i]=new ArrayList<>();
-             next[i]=new ArrayList<>();
+            nm.add(new ArrayList<>());
         }
-        
-        for(int [] arr:prerequisites)
+        for(int i=0;i<p.length;i++)
         {
-            adj[arr[0]].add(arr[1]);
-            next[arr[1]].add(arr[0]);
+            nm.get(p[i][1]).add(p[i][0]);
         }
-        
-           for(int i=0;i<numCourses;i++)
+        Queue<Integer> kk=new LinkedList<>();
+        int a[]=new int[n];
+        for(int i=0;i<n;i++)
         {
-            if((adj[i].size()==0))
+            for(int k:nm.get(i))
             {
-               
-                queue.offer(i);
-            }   
-               
-        }
-        while(!queue.isEmpty() && result.size()<numCourses)
-        {
-                int index=queue.poll();
-                if(!result.contains(index))
-                {
-                    result.add(index);
-                }
-                for(Integer i:next[index])
-                {  
-                    flag=true;
-                    for(Integer n:adj[i])
-                    {
-                        if(!result.contains(n))
-                        {
-                            flag=false;
-                        }
-                    }
-                    if(flag)
-                        queue.offer(i);
-                }    
+                a[k]++;
             }
-        if(result.size()<numCourses)
-            result.clear();
-        return result.stream().mapToInt(i->i).toArray();
-        
+        }
+        for(int i=0;i<a.length;i++)
+        {
+            if(a[i]==0)
+            {
+                kk.offer(i);
+            }
+        }
+        int k[]=new int[n];
+        int i=0;
+        while(!kk.isEmpty())
+        {
+            int x=kk.poll();
+            k[i++]=x;
+            for(int j:nm.get(x))
+            {
+                a[j]--;
+                if(a[j]==0)
+                {
+                    kk.offer(j);
+                }
+            }
+        }
+        return i==n ? k : new int[0];
     }
 }
