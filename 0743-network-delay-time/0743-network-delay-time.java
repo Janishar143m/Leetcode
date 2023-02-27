@@ -40,7 +40,7 @@ class Solution {
             {
                 if(adj[node.getVal()][i]!=-1)
                 {
-                    weight[i]=Math.min(weight[i],node.getWeight()+adj[node.getVal()][i]);
+                   weight[i]=node.getWeight()+adj[node.getVal()][i];
                     queue.offer(new Node(i,weight[i]));
                 }
             }
